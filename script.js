@@ -421,9 +421,9 @@ gsap.utils.toArray(".rv").forEach(function (el) {
         scrollTrigger: {
             trigger: philosophy,
             start: "top top",
-            end: "+=300%",
+            end: "+=150%",
             pin: true,
-            scrub: 1,
+            scrub: 0.5,
             anticipatePin: 1,
             invalidateOnRefresh: true
         }
@@ -513,7 +513,7 @@ gsap.utils.toArray(".rv").forEach(function (el) {
     let currentY = window.scrollY;
     let animationFrame = null;
 
-    const strength = 0.45; // Lower = less movement per wheel input
+    const strength = 0.3; // Lower = less movement per wheel input
     const stiffness = 0.12; // Lower = heavier, slower catch-up
 
     function animateScroll() {
@@ -852,16 +852,43 @@ gsap.utils.toArray(".rv").forEach(function (el) {
 
 
   // why choose us: pinned, reasons swap as you scroll
-  var rs=gsap.utils.toArray('.rs'), lis=gsap.utils.toArray('#wl li');
-  gsap.set(rs.slice(1),{opacity:0,y:50});
-  var wy=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'#why',start:'top top',end:'+=300%',pin:true,scrub:true,
-    onUpdate:function(s){var i=Math.min(rs.length-1,Math.floor(s.progress*rs.length));lis.forEach(function(l,k){l.classList.toggle('on',k===i)})}}});
-  rs.forEach(function(r,i){
-    if(i>0) wy.to(r,{opacity:1,y:0,duration:.3},i);
-    if(i<rs.length-1) wy.to(r,{opacity:0,y:-50,duration:.3},i+.7);
-  });
-  wy.to({},{duration:.3},rs.length-.3);
+var rs = gsap.utils.toArray('.rs'),
+    lis = gsap.utils.toArray('#wl li');
 
+gsap.set(rs.slice(1), { opacity: 0, y: 50 });
+
+var wy = gsap.timeline({
+    defaults: { ease: 'none' },
+    scrollTrigger: {
+        trigger: '#why',
+        start: 'top top',
+        end: '+=150%', // Was 300% — transitions happen sooner
+        pin: true,
+        scrub: true,
+        onUpdate: function(s) {
+            var i = Math.min(
+                rs.length - 1,
+                Math.floor(s.progress * rs.length)
+            );
+
+            lis.forEach(function(l, k) {
+                l.classList.toggle('on', k === i);
+            });
+        }
+    }
+});
+
+rs.forEach(function(r, i) {
+    if (i > 0) {
+        wy.to(r, { opacity: 1, y: 0, duration: 0.3 }, i);
+    }
+
+    if (i < rs.length - 1) {
+        wy.to(r, { opacity: 0, y: -50, duration: 0.3 }, i + 0.7);
+    }
+});
+
+wy.to({}, { duration: 0.3 }, rs.length - 0.3);
 
 
   const contactForm = document.querySelector("#contact-form");
