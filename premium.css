@@ -1,0 +1,35 @@
+/* premium.css — load AFTER style.css */
+:root{--gold:var(--bronze)} /* #why used --gold, which style.css never defined */
+
+/* film grain */
+body::after{content:"";position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:.06;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* 3D tilt cards: let GSAP own the transform, keep colour transitions */
+.image-container,.fact-card{transition:border-color .35s ease,background .4s ease;transform-style:preserve-3d}
+.image-container:hover,.fact-card:hover{transform:none}
+.contact-form-wrap{position:relative;overflow:hidden}
+.glare{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.2),transparent 55%)}
+:hover>.glare{opacity:1}
+
+/* 3D scales of justice inside "Why us" */
+#why{position:relative}
+.why-cv{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.why-in{position:relative;z-index:1}
+@media(max-width:1000px){.why-cv{opacity:.3}}
+
+/* marquee */
+.mq{overflow:hidden;white-space:nowrap;padding:5vh 0;background:#080b09;border-block:1px solid var(--line)}
+.mq-t{display:inline-block;font:italic 400 clamp(3rem,9vw,8rem)/1 var(--serif);color:transparent;-webkit-text-stroke:1px var(--bronze);will-change:transform}
+
+/* "Uncertainty ends here" statement */
+.ends{flex-direction:column;align-items:flex-start;justify-content:center;gap:3.5rem;padding:14vh clamp(1rem,7vw,7rem);background:#080b09;overflow:hidden}
+.ends h2{font-size:clamp(3.4rem,10vw,10rem);line-height:.92;letter-spacing:-.03em;margin:0}
+.ends h2 em{color:var(--bronze)}
+.ends p{max-width:32rem;margin:1.6rem 0 0}
+.strike{position:relative;display:inline-block;color:var(--muted)}
+.strike::after{content:"";position:absolute;left:-2%;right:-2%;top:54%;height:.06em;background:var(--bronze);transform:scaleX(var(--s,0));transform-origin:left}
+.ends-stage{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.6rem,2vw,1.6rem);width:100%;perspective:1400px}
+.ep{margin:0;aspect-ratio:3/4;overflow:hidden;border:1px solid var(--line);transform-style:preserve-3d}
+.ep img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.8) brightness(.85)}
