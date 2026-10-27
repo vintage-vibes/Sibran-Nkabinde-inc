@@ -421,7 +421,7 @@ gsap.utils.toArray(".rv").forEach(function (el) {
         scrollTrigger: {
             trigger: philosophy,
             start: "top top",
-            end: "+=250%",
+            end: "+=350%",
             pin: true,
             scrub: 0.5,
             anticipatePin: 1,
@@ -862,7 +862,7 @@ var wy = gsap.timeline({
     scrollTrigger: {
         trigger: '#why',
         start: 'top top',
-        end: '+=250%', // Was 300% — transitions happen sooner
+        end: '+=350%', // Was 300% — transitions happen sooner
         pin: true,
         scrub: true,
         onUpdate: function(s) {
